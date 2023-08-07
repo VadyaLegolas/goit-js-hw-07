@@ -1,9 +1,10 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
+console.log(galleryItems);
 const refs = {
   galleryUl: document.querySelector(".gallery"),
 };
-// console.log(galleryItems);
+
 const galleryMarkup = createGalleryMarkup(galleryItems);
 refs.galleryUl.insertAdjacentHTML("beforeend", galleryMarkup);
 
@@ -30,7 +31,7 @@ function createGalleryMarkup(gallery) {
 function onGalleryUlClick(e) {
   e.preventDefault();
   const img = e.target;
-  if (!img.classList.contains('gallery__image')) {
+  if (!img.classList.contains("gallery__image")) {
     return;
   }
   const instance = basicLightbox.create(`
