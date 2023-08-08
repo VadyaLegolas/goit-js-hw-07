@@ -18,10 +18,6 @@ if ("loading" in HTMLImageElement.prototype) {
   });
 } else {
   // fetch polyfill/third-party library
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  images.forEach((img) => {
-    img.classList.add("lazyload");
-  });
   const script = document.createElement("script");
   script.src =
     "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
@@ -42,7 +38,7 @@ function createGalleryMarkup(gallery) {
             <a class="gallery__link" href="${original}">
                 <img
                 loading="lazy"
-                class="gallery__image"
+                class="gallery__image lazyload"
                 data-src="${preview}"
                 data-source="${original}"
                 alt="${description}"
