@@ -12,7 +12,7 @@ refs.galleryUl.insertAdjacentHTML("beforeend", galleryMarkup);
 
 if ("loading" in HTMLImageElement.prototype) {
   // supported in browser
-  addSrcToImages();
+  addSrcToLazyImages();
 } else {
   // fetch polyfill/third-party library
   addLazySizesScript();
@@ -59,7 +59,7 @@ function addLazySizesScript() {
   document.body.appendChild(script);
 }
 
-function addSrcToImages() {
+function addSrcToLazyImages() {
   const images = document.querySelectorAll('img[loading="lazy"]');
   images.forEach((img) => {
     img.src = img.dataset.src;
