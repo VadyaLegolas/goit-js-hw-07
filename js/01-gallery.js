@@ -8,7 +8,7 @@ const refs = {
 const galleryMarkup = createGalleryMarkup(galleryItems);
 refs.galleryUl.insertAdjacentHTML("beforeend", galleryMarkup);
 
-refs.galleryUl.addEventListener("click", onGalleryUlClick);
+
 
 if ("loading" in HTMLImageElement.prototype) {
   // supported in browser
@@ -31,6 +31,8 @@ if ("loading" in HTMLImageElement.prototype) {
   script.referrerPolicy = "no-referrer";
   document.body.appendChild(script);
 }
+
+refs.galleryUl.addEventListener("click", onGalleryUlClick);
 
 function createGalleryMarkup(gallery) {
   return gallery
