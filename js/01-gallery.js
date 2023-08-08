@@ -12,20 +12,10 @@ refs.galleryUl.insertAdjacentHTML("beforeend", galleryMarkup);
 
 if ("loading" in HTMLImageElement.prototype) {
   // supported in browser
-  const images = document.querySelectorAll('img[loading="lazy"]');
-  images.forEach((img) => {
-    img.src = img.dataset.src;
-  });
+  addSrcToImages();
 } else {
   // fetch polyfill/third-party library
-  const script = document.createElement("script");
-  script.src =
-    "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
-  script.integrity =
-    "sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==";
-  script.crossOrigin = "anonymous";
-  script.referrerPolicy = "no-referrer";
-  document.body.appendChild(script);
+  addLazySizesScript();
 }
 
 refs.galleryUl.addEventListener("click", onGalleryUlClick);
@@ -65,5 +55,23 @@ function onGalleryUlClick(e) {
     if (event.code === "Escape") {
       instance.close();
     }
+  });
+}
+
+function addLazySizesScript() {
+   const script = document.createElement("script");
+   script.src =
+     "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
+   script.integrity =
+     "sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==";
+   script.crossOrigin = "anonymous";
+   script.referrerPolicy = "no-referrer";
+   document.body.appendChild(script);
+}
+
+function addSrcToImages() {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+  images.forEach((img) => {
+    img.src = img.dataset.src;
   });
 }
