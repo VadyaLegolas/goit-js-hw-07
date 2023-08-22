@@ -18,7 +18,7 @@ if ("loading" in HTMLImageElement.prototype) {
   addLazySizesScript();
 }
 
-refs.galleryUl.addEventListener("click", onGalleryUlClick);
+// refs.galleryUl.addEventListener("click", onGalleryUlClick);
 
 function createGalleryMarkup(gallery) {
   return gallery
@@ -33,12 +33,12 @@ function createGalleryMarkup(gallery) {
     .join("");
 }
 
-function onGalleryUlClick(e) {
-  e.preventDefault();
-  const img = e.target;
-  if (!img.classList.contains("gallery__image")) {
-    return;
-  }
+// function onGalleryUlClick(e) {
+//   e.preventDefault();
+//   const img = e.target;
+//   if (!img.classList.contains("gallery__image")) {
+//     return;
+//   }
 
   let gallery = new SimpleLightbox(".gallery a", {
     captions: true,
@@ -46,7 +46,7 @@ function onGalleryUlClick(e) {
     captionPosition: "bottom",
     captionDelay: 250,
   });
-}
+// }
 
 function addLazySizesScript() {
   const script = document.createElement("script");
