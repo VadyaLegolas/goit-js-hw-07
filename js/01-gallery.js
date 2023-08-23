@@ -8,8 +8,6 @@ const refs = {
 const galleryMarkup = createGalleryMarkup(galleryItems);
 refs.galleryUl.insertAdjacentHTML("beforeend", galleryMarkup);
 
-
-
 if ("loading" in HTMLImageElement.prototype) {
   // supported in browser
   addSrcToLazyImages();
@@ -45,28 +43,45 @@ function onGalleryUlClick(e) {
   if (!img.classList.contains("gallery__image")) {
     return;
   }
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
     <img src="${img.dataset.source}" width="800" height="600">
-  `);
+  `,
+    {
+      handler: null,
+      onShow(instance) {
+        this.handler = closeModal.bind(instance);
+        document.addEventListener("keydown", this.handler);
+      },
+      onClose() {
+        document.removeEventListener("keydown", this.handler);
+      },
+    }
+  );
 
   instance.show();
 
-  document.addEventListener("keydown", (event) => {
-    if (event.code === "Escape") {
-      instance.close();
-    }
-  });
+  // document.addEventListener("keydown", (event) => {
+  //   if (event.code === "Escape") {
+  //     instance.close();
+  //   }
+  // });
 }
 
+function closeModal(e) {
+  if (e.code === "Escape") {
+    this.close();
+  }
+}
 function addLazySizesScript() {
-   const script = document.createElement("script");
-   script.src =
-     "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
-   script.integrity =
-     "sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==";
-   script.crossOrigin = "anonymous";
-   script.referrerPolicy = "no-referrer";
-   document.body.appendChild(script);
+  const script = document.createElement("script");
+  script.src =
+    "https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js";
+  script.integrity =
+    "sha512-q583ppKrCRc7N5O0n2nzUiJ+suUv7Et1JGels4bXOaMFQcamPk9HjdUknZuuFjBNs7tsMuadge5k9RzdmO+1GQ==";
+  script.crossOrigin = "anonymous";
+  script.referrerPolicy = "no-referrer";
+  document.body.appendChild(script);
 }
 
 function addSrcToLazyImages() {
